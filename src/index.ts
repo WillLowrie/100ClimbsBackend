@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
-import {authRouter} from './routes/auth.route';
+import { authRouter } from './routes/auth.route';
 
 const app: Express = express();
 

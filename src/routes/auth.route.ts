@@ -5,4 +5,6 @@ const authRouter: Router = express.Router();
 
 authRouter.get('/', beginAuthFlow)
 
+authRouter.get('/:state&:code&:scope')
+
 export {authRouter};
