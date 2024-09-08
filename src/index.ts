@@ -1,11 +1,14 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
+import authRouter from './routes/auth.route';
 
 const app: Express = express();
 
 const dotenvPath: string = path.relative(process.cwd(), path.join(__dirname, 'env_vars', '.env'));
 dotenv.config({path: dotenvPath});
+
+app.use('/auth/', authRouter);
 
 app.get('/', async (req: Request, res: Response) => {
     try {
