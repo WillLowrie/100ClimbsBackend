@@ -1,10 +1,8 @@
 import express, { Router } from 'express';
+import {beginAuthFlow} from '../controllers/auth.controller';
 
 const authRouter: Router = express.Router();
 
-authRouter.get('/', async (req, res) => {
-    console.log('Auth endpoint called');
-    res.status(200).send("Auth router working.");
-})
+authRouter.get('/', beginAuthFlow)
 
-module.exports = authRouter;
+export {authRouter};

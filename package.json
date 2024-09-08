@@ -4,7 +4,6 @@
   "description": "Backend for the 100 Climbs Tracker Web App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "node build/index.js",
     "dev-serve": "nodemon build/index.js",
     "lint": "npx eslint .",
