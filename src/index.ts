@@ -2,7 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import { authRouter } from './routes/auth.route';
-import { generateAuthURL } from './functions';
+import { generateAuthURL } from './services/auth.service';
 
 const app: Express = express();
 app.use(express.json());

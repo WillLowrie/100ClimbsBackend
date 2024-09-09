@@ -1,18 +1,26 @@
 import { Request, Response } from 'express';
+import { getAccesssAndRefreshCode } from '../services/auth.service';
 
 const getStravaAuthCode = async (req: Request, res: Response) => {
     try{
         if (!req.query.code || !req.query.scope) {
             // Get user to try again.
-            res.status(403).send('No auth code found.');
+            res.status(403).json({
+                auth_status: 'Failed',
+                message: 'Unable to access scope or code'
+            });
         } else if (req.query.scope != 'read,activity:read_all,read_all') {
             // Get user to reauthenticate with elevated permissions for the app.
-            res.status(403).send('Incorrect scope.')
+            res.status(403).json({
+                auth_status: 'Failed',
+                message: 'Required access scope not granted'
+            })
         } else {
-            const tempCode: string = req.query.code;
-            const scope: string = req.query.scope;
-            // Make call to get access and refresh token then save to database.
-            res.status(200).json({code: tempCode, scope: scope});
+            res.status(200).json({
+                auth_status: 'Success',
+                message: 'Auth code successfully received'
+            });
+            getAccesssAndRefreshCode(req.query.code.toString());
         }
     } catch (err) {
         if (err instanceof Error) {
@@ -23,8 +31,4 @@ const getStravaAuthCode = async (req: Request, res: Response) => {
     }
 }
 
-const getAccesssAndRefreshCode = async (req: Request, res: Response) => {
-    return
-}
-
-export { getStravaAuthCode, getAccesssAndRefreshCode };
+export { getStravaAuthCode };
