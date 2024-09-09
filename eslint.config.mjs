@@ -13,3 +13,5 @@ export default tseslint.config(
     }
   }
 );
+
+// TODO: Fix ESLint for .ts files.
